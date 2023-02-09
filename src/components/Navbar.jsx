@@ -10,7 +10,6 @@ function Navbar({ isScrolled }) {
   const { logout } = UserAuth();
   const links = [
     { name: "Home", link: "/" },
-    { name: "Tv Shows", link: "/tv" },
     { name: "Movies", link: "/movies" },
     { name: "My List", link: "/mylist" },
   ];
@@ -66,7 +65,6 @@ function Navbar({ isScrolled }) {
               }}
             />
           </div>
-          <div> Account </div>
           <button onClick={onLogout}>
             <FaPowerOff />
           </button>

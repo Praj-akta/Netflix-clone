@@ -19,7 +19,7 @@ export default function Login() {
     try {
       const { email, password } = formvalues;
       await login(email, password);
-      navigate("/");
+      navigate("/browse");
     } catch (error) {
       setError(error.message);
     }

@@ -6,16 +6,28 @@ import React, { useState, useEffect } from "react";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-function Rows({ title, fetchUrl, id }) {
+function Rows({ title, fetchUrl, id, showBackdropPath, selectedGenreId }) {
   const { user } = UserAuth();
   const [movies, setMovies] = useState([]);
   const [favoritesList, setFavoritesList] = useState([]);
 
   useEffect(() => {
     axios.get(fetchUrl).then(({ data }) => {
-      setMovies(data.results);
+      if(selectedGenreId) {
+        const modifiedRes = data.results.reduce((accum, value, index) => {
+          value.genre_ids.map((id) => {
+            if(parseInt(id) === parseInt(selectedGenreId)) {
+              accum.push(value)
+            }
+          });
+          return accum
+        }, []);
+        setMovies(modifiedRes);
+      } else {
+        setMovies(data.results);
+      }
     });
-  }, [fetchUrl]);
+  }, [fetchUrl, selectedGenreId]);
 
   useEffect(() => {
     onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
@@ -23,7 +35,7 @@ function Rows({ title, fetchUrl, id }) {
     });
   }, [user?.email]);
 
-  const movieRef = doc(db, 'users', `${user?.email}`);
+  const movieRef = doc(db, "users", `${user?.email}`);
   const removeFromFavorites = async (id) => {
     try {
       const res = favoritesList.filter((item) => item.id !== id);
@@ -61,7 +73,7 @@ function Rows({ title, fetchUrl, id }) {
             whitespace-nowrap scroll-smooth scrollbar-hide"
         >
           {movies.map((item, index) => {
-            let modifiedItem = favoritesList?.map((value) => {
+            favoritesList?.map((value) => {
               if (item.id === value.id) {
                 item = {
                   ...item,
@@ -74,6 +86,7 @@ function Rows({ title, fetchUrl, id }) {
               <Movie
                 key={index}
                 item={item}
+                showBackdropPath={showBackdropPath}
                 removeFromFavorites={removeFromFavorites}
               />
             );

@@ -45,3 +45,20 @@ body::-webkit-scrollbar {
 .j-center {
   justify-content: center;
 }
+.font-larger {
+  font-size: 1.7em;
+}
+.select-genre {
+  color: #fff;
+  outline: none;
+  padding: 0.5rem;
+  background: transparent;
+  border: 1px solid #fff;
+  margin: 4rem 1rem 1rem 1rem;
+}
+.profiles:hover img {
+  border: 1px solid #fff;
+}
+.profiles:hover h6{
+  color: #fff;
+}

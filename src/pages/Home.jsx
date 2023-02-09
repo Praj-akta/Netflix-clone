@@ -37,6 +37,7 @@ function Home() {
       url: requests.requestHorror,
     },
   ];
+  
   return (
     <>
       <Main />
@@ -47,6 +48,7 @@ function Home() {
             id={index + 1}
             title={value.title}
             fetchUrl={value.url}
+            showBackdropPath={false}
           />
         );
       })}
