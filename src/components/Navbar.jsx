@@ -85,12 +85,12 @@ const Container = styled.div`
     top: 0;
     width: 100%;
     z-index: 2;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
     align-items: center;
     transition: 0.3s ease-in-out;
     justify-content: space-between;
     .left {
-      gap: 2rem;
+      gap: 1rem;
       .brand {
         img {
           height: 2.5rem;
@@ -98,7 +98,7 @@ const Container = styled.div`
       }
       .links {
         list-style-type: none;
-        gap: 1.2rem;
+        gap: 1rem;
         li {
           a {
             color: #fff;
