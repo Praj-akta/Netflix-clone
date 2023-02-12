@@ -64,19 +64,18 @@ body::-webkit-scrollbar {
   display: block;
   position: absolute;
   background: #fff;
-  top: 19%;
+  top: 50px;
   left: 5%;
   right: 5%;
-  transform: translateY(-61%);
   z-index: 11;
   color: #000;
   box-shadow: 300px 150px 150px 400px rgba(0, 0, 0, 0.7);
 }
+.modal-open {
+  position: relative;
+}
 
 @media screen and (max-width: 767px) {
-  .modal-popup {
-    top: 32%;
-  }
   .modal-body h1 {
     font-size: 20px;
   }
