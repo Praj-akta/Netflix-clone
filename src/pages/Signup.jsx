@@ -15,7 +15,8 @@ export default function Signup() {
     password: "",
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const { email, password } = formvalues;
       await signUp(email, password);
@@ -48,7 +49,7 @@ export default function Signup() {
               Ready to watch? Enter your email to create or restart membership
             </h6>
           </div>
-          <div className="form">
+          <form className="form" onSubmit={handleSubmit}>
             <input
               type="email"
               name="email"
@@ -65,7 +66,8 @@ export default function Signup() {
               <input
                 type="password"
                 name="password"
-                placeholder="Password"
+                minLength={6}
+                placeholder="At least 6 characters"
                 value={formvalues.password}
                 onChange={(e) =>
                   setFormValues({
@@ -79,9 +81,9 @@ export default function Signup() {
               <button onClick={(_) => onGetStarted()}>Get Started</button>
             )}
             {emailErr && <p>{emailErr}</p>}
-          </div>
+          </form>
           {formvalues.email && formvalues.password ? (
-            <button onClick={(_) => handleSubmit()}> Sign Up</button>
+            <button type="submit"> Sign Up</button>
           ) : null}
         </div>
       </div>

@@ -14,7 +14,8 @@ export default function Login() {
     password: "",
   });
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     setError("");
     try {
       const { email, password } = formvalues;
@@ -36,10 +37,11 @@ export default function Login() {
               <h2>Sign In</h2>
             </div>
             {error && <p className="text-xs">{error}</p>}
-            <div className="container flex column">
+            <form onSubmit={handleLogin} className="container flex column">
               <input
                 type="email"
                 name="email"
+                required
                 value={formvalues.email}
                 placeholder="Email Address"
                 onChange={(e) =>
@@ -52,6 +54,7 @@ export default function Login() {
               <input
                 type="password"
                 name="password"
+                required
                 placeholder="Password"
                 value={formvalues.password}
                 onChange={(e) =>
@@ -61,7 +64,7 @@ export default function Login() {
                   })
                 }
               />
-              <button type="submit" onClick={handleLogin}>
+              <button type="submit">
                 Sign In
               </button>
               <div className="redirect-url">
@@ -71,7 +74,7 @@ export default function Login() {
                   not a bot.
                 </p>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
