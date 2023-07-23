@@ -22,7 +22,13 @@ export default function Login() {
       await login(email, password);
       navigate("/browse");
     } catch (error) {
-      setError(error.message);
+      if(error.message === "Firebase: Error (auth/user-not-found).") {
+        setError("Sorry, we can't find an account with this email address. Please try again or create a new account.")
+      } else if(error.message === "Firebase: Error (auth/wrong-password).") {
+        setError("Incorrect password. Please try again.")
+      } else {
+        setError(error.message);
+      }
     }
   };
 
@@ -36,7 +42,7 @@ export default function Login() {
             <div>
               <h2>Sign In</h2>
             </div>
-            {error && <p className="text-xs">{error}</p>}
+            {error && <p className="error-msg">{error}</p>}
             <form onSubmit={handleLogin} className="container flex column">
               <input
                 type="email"
@@ -93,13 +99,19 @@ const Container = styled.div`
     width: 100vw;
     display: grid;
     grid-template-rows: 15vh 85vh;
+    .error-msg {
+      color: #fff;
+      font-size: 14px;
+      border-radius: 4px;
+      padding: 10px 20px;
+      background: #e87c03;
+    }
     .form-container {
       gap: 2rem;
       height: 85vh;
       .form {
         padding: 2rem 3rem;
-        width: 350px;
-        height: 500px;
+        width: 400px;
         background: #000000b0;
         gap: 2rem;
         color: #fff;
